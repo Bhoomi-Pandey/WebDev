@@ -1,0 +1,40 @@
+body{
+    display:flex;
+    background-color:#1a1a1a;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin:0;
+}
+
+
+.logo{
+    width: 150px;
+    height: 150px;
+    background-color: #C0C0C0;
+    position: relative;
+    box-shadow: 2px 2px 5px white;
+    display: block;
+    transform: rotate(45deg);
+    animation: logo 4s ease-in-out 3s infinite;
+}
+
+.logo::before{
+    content:"";
+    position:absolute;
+    top:25%;
+    left: 25%;
+    width:75px;
+    height:75px;
+    background-color: #1a1a1a;
+}
+
+@keyframes logo {
+    0%, 100% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    50%{
+        transform: rotate(45deg) scale(1.3);
+    }
+}
