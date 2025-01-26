@@ -1,67 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
-   <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-   <h2> Search Google</h2>
-   <form action="https://www.google.com/search" method="get">
+  <h1>To-do List</h1>
+  <div id="todos">
+    <div id="todo-1">
+      <h4>1. Take Online Class</h4>
+      <button onclick="deleteTodo(1)">Delete</button>
+    </div>
+    <div id="todo-2">
+      <h4>2. Do Laundry</h4>
+      <button onclick="deleteTodo(2)">Delete</button>
+    </div>
+  </div>
+  <div class="input-container">
+    <input id="inp" type="text" placeholder="Enter a new to-do...">
+    <button onclick="addTodo()">Add To-do</button>
+  </div>
 
+  <script>
+    let currentIndex = 3;
 
-       <label>
-           Enter Your Query:
-           <input type="text" name="q" placeholder="Search Google">
-       </label>
+    function addTodo() {
+      const inputEl = document.getElementById("inp");
+      const todoText = inputEl.value.trim();
 
+      if (todoText === '') {
+        alert('Please enter a todo item.');
+        return;
+      }
 
-        <button> Search </button>
-       <hr>
-      
-   </form>
+      const parentEl = document.getElementById("todos");
 
+      // Create new todo div
+      const newTodo = document.createElement('div');
+      newTodo.setAttribute("id", 'todo-' + currentIndex);
+      newTodo.classList.add('todo-item');
 
-   <h2> Registration Form</h2>
+      // Create new heading element
+      const newHeading = document.createElement('h4');
+      newHeading.textContent = currentIndex + '. ' + todoText;
 
+      // Create new button element
+      const newButton = document.createElement('button');
+      newButton.textContent = 'Delete';
+      newButton.setAttribute("onclick", "deleteTodo(" + currentIndex + ")");
 
-   <label>
-       <input type="text" placeholder="First Name">
-   </label>
+      // Append elements to the new todo div
+      newTodo.appendChild(newHeading);
+      newTodo.appendChild(newButton);
 
+      // Append new todo to the parent element
+      parentEl.appendChild(newTodo);
 
-   <label>
-       <input type="text" placeholder="Last Name">
-   </label>
-   <br>
+      // Increment the index for the next todo item
+      currentIndex++;
 
+      // Clear the input field
+      inputEl.value = '';
+    }
 
-   <label>
-       Please select your gender
-      <select name="gender" id= "gender">
-       <option value ="Female">Female</option>
-       <option value ="Male">Male</option>
-       <option value ="Other">Other</option>
-      </select>
-   </label>
-
-   <br>
-
-   <label>
-       Do you agree to all terms of service?
-       <input type="checkbox" name="Terms" id="terms" checked/>
-   </label>
-   Yes I Agree
-
-   <br>
-
-   <button> Register</button>
-
-   <style>
-      
-   </style>
-  
+    function deleteTodo(index) {
+      const element = document.getElementById("todo-" + index);
+      if (element) {
+        element.parentNode.removeChild(element);
+      }
+    }
+  </script>
 </body>
+
 </html>
 
